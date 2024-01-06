@@ -1,17 +1,24 @@
 
 public class Driver implements LevelUp{
-    String name;
-    int experience;
-    String weatherBonus;
-    int level;
-    int tierCoin;
+    private String name;
+    private int experience;
+    private int level;
+    private Weather weatherBonus;
+    private int tierCoin;
 
-    public Driver(String name, int experience, String weatherBonus, int level,int tierCoin) {
+    public Driver(String name, int experience,int level, Weather weatherBonus, int tierCoin) {
         this.name=name;
         this.experience = experience;
         this.weatherBonus=weatherBonus;
         this.level=level;
         this.tierCoin=tierCoin;
+    }
+    public Driver(String name, Weather weatherBonus){
+        this.name=name;
+        this.experience=0;
+        this.weatherBonus=weatherBonus;
+        this.level=0;
+        this.tierCoin=0;
     }
 
     public String getName() {
@@ -30,11 +37,11 @@ public class Driver implements LevelUp{
         this.experience = experience;
     }
 
-    public String getWeatherBonus() {
+    public Weather getWeatherBonus() {
         return weatherBonus;
     }
 
-    public void setWeatherBonus(String weatherBonus) {
+    public void setWeatherBonus(Weather weatherBonus) {
         this.weatherBonus = weatherBonus;
     }
 
@@ -46,19 +53,23 @@ public class Driver implements LevelUp{
         this.level = level;
     }
 
-    public int experienceBonusSpeed(){
+    public double experienceBonusSpeed(){
         int experienceBonusSpeed=10*experience/100;
         return experienceBonusSpeed;
     }
-    public int weatherBonusSpeed(String weather){
+    public double weatherBonusSpeed(Weather weather){
         int weatherBonusSpeed=0;
-        if(weather.equalsIgnoreCase(weatherBonus)){
+        if(weather==weatherBonus){
             weatherBonusSpeed=10;
         }
         return weatherBonusSpeed;
     }
+    public double totalBonus(Weather weather){
+        return experienceBonusSpeed()+weatherBonusSpeed(weather);
+    }
+    //DE MODIFICAT!!!!!
     public void increaseExperience(){
-        experience+=10;
+        experience+=5;
     }
 
     @Override

@@ -1,5 +1,5 @@
 public class Motorcycle extends Vehicle implements MotoActions{
-    public Motorcycle(int nrWheels, String steering, Tire tire, Engine engine, String color) {
+    public Motorcycle(Tire tire, Engine engine, Color color) {
         super(2, "Handles(CounterSteering)", tire, engine, color);
     }
 

@@ -3,9 +3,9 @@ public abstract class Vehicle {
     String steering;
     Tire tire;
     Engine engine;
-    String color;
+    Color color;
 
-    public Vehicle(int nrWheels, String steering, Tire tire, Engine engine, String color) {
+    public Vehicle(int nrWheels, String steering, Tire tire, Engine engine, Color color) {
         this.nrWheels = nrWheels;
         this.steering = steering;
         this.tire = tire;
@@ -45,11 +45,11 @@ public abstract class Vehicle {
         this.engine = engine;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 }
