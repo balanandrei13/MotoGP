@@ -24,7 +24,7 @@ public class Tire implements LevelUp {
 
     public Tire(){
         this.adherence=0;
-        this.tier=0;
+        this.tier=1;
     }
     public int tireBonusSpeed(){
         int tireBonusSpeed= adherence/10 + tier;

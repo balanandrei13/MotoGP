@@ -1,14 +1,14 @@
 public class Engine implements LevelUp {
-    int horsepower;
-    int tier;
+    private int horsepower;
+    private int tier;
 
     public Engine(int horsepower, int tier) {
         this.horsepower = horsepower;
         this.tier=tier;
     }
     public Engine() {
-        this.horsepower = 0;
-        this.tier=0;
+        this.horsepower = 80;
+        this.tier=1;
     }
 
     public int getHorsepower() {

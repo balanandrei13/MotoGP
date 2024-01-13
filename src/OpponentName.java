@@ -4,7 +4,15 @@ public enum OpponentName {
     JAMES,
     JOHANNA,
     MAURICE,
-    KYLE;
+    KYLE,
+    TRENT,
+    KAMILA,
+    INGRID,
+    BOGDANOV,
+    EUNSEO,
+    MINHOO,
+    HIROSHI,
+    DAIKI;
     public static String generateRandomName(){
         OpponentName[] names= OpponentName.values();
         int namesLength= names.length;
