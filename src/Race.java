@@ -1,27 +1,29 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Race {
     RaceGenerator raceGenerator;
     public Race(RaceGenerator raceGenerator){
         this.raceGenerator=raceGenerator;
     }
-    public HashMap<String,Double> raceResults(RaceGenerator raceGenerator){
-        HashMap<String,Double> entitySpeed=new HashMap<String,Double>();
-        ArrayList<Opponent> opponents=raceGenerator.getOpponents();
-        Player player=raceGenerator.getPlayer();
+    public void raceResults(RaceGenerator raceGenerator){
 
-        double playerTopSpeed=player.getTopSpeed(raceGenerator.getTrack().getTrackWeather());
+        ArrayList<Double> speedList = new ArrayList<>();
 
-        for(Opponent opponent:opponents){
-         double speed=opponent.getTopSpeed(raceGenerator.getTrack().getTrackWeather());
-         entitySpeed.put(opponent.getDriver().getName(),speed);
+        ArrayList<Character> racers = new ArrayList<>();
+
+        for(Character opponent: raceGenerator.opponents){
+            speedList.add(opponent.topSpeed);
         }
-        entitySpeed.entrySet()
-                .stream()
-                .sorted(Map.Entry.<String, Double>comparingByValue())
-                .forEach(System.out::println);
-        return entitySpeed;
+
+        speedList.add(raceGenerator.player.getTopSpeed());
+
+        Collections.sort(speedList);
+
+        System.out.println("This are our results for today:");
+
+        racers.sort((o1,o2)->
+                (o1.getTopSpeed().CompareTo.o2.getTOpSpeed()));
     }
 }

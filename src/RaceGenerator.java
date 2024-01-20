@@ -9,12 +9,14 @@ public class RaceGenerator {
     Track track;
 
     public RaceGenerator() {
-        this.player = Player.getInstance(createDriver(), createMotorcycle());
-        createOpponent();
-        createOpponent();
-        createOpponent();
-        createOpponent();
+        opponents=new ArrayList<>();
+        this.player = Player.getInstance(createDriver(), createMotorcycle(), 80,0);
         this.track=createTrack();
+        createOpponent();
+        createOpponent();
+        createOpponent();
+        createOpponent();
+        createOpponent();
     }
 
     public Player getPlayer() {
@@ -41,6 +43,12 @@ public class RaceGenerator {
         this.track = track;
     }
 
+    public Track createTrack(){
+        Random rand=new Random();
+        int randomLength=rand.nextInt(10,30);
+        return new Track(randomLength,Weather.generateRandomWeather());
+
+    }
     public Driver createDriver(){
         Scanner scanner=new Scanner(System.in);
         System.out.println("Please choose a player name: ");
@@ -57,36 +65,34 @@ public class RaceGenerator {
         Random rand= new Random();
         int experience= rand.nextInt(0,9);
         String name=OpponentName.generateRandomName();
-        Driver opponentDriver=new Driver(name,experience,player.getPlayerLevel(),Weather.generateRandomWeather(),0);
+        Driver opponentDriver=new Driver(name,experience,player.getDriver().getLevel(), Weather.generateRandomWeather());
         return  opponentDriver;
     }
-    public Motorcycle createOpponentMotorcycle(){
-        Motorcycle opponentMotorcycle=player.getPlayerMotorcycle();
-        opponentMotorcycle.engine.setTier(generateOpponentTierEngine());
-        opponentMotorcycle.tire.setTier(generateOpponentTierTire());
-        return opponentMotorcycle;
-    }
+
     public int generateOpponentTierEngine(){
-        Motorcycle opponentMotorcycle=player.getPlayerMotorcycle();
+        Motorcycle opponentMotorcycle=player.getMotorcycle();
         int limit=opponentMotorcycle.engine.getTier();
         Random rand=new Random();
         return rand.nextInt(limit+1);
     }
     public int generateOpponentTierTire(){
-        Motorcycle opponentMotorcycle=player.getPlayerMotorcycle();
+        Motorcycle opponentMotorcycle=player.getMotorcycle();
         int limit=opponentMotorcycle.tire.getTier();
         Random rand=new Random();
         return rand.nextInt(limit+1);
     }
-    public void createOpponent(){
-        this.opponent=new Opponent(createOpponentDriver(),createOpponentMotorcycle());
-        opponent.addOpponents(opponent);
+    public Motorcycle createOpponentMotorcycle() {
+        Motorcycle opponentMotorcycle = player.getMotorcycle();
+        opponentMotorcycle.engine.setTier(generateOpponentTierEngine());
+        opponentMotorcycle.tire.setTier(generateOpponentTierTire());
+        return opponentMotorcycle;
     }
-    public Track createTrack(){
-        Random rand=new Random();
-        int randomLength=rand.nextInt(10,30);
-        return new Track(randomLength,Weather.generateRandomWeather());
 
+    public void createOpponent(){
+        this.opponent=new Opponent(createOpponentDriver(),createOpponentMotorcycle(),0);
+        double topSpeed=opponent.calculateTopSpeed(track.getTrackWeather());
+        opponent.setTopSpeed(topSpeed);
+        this.opponents.add(opponent);
     }
 //    public Race generateGame() {
 //        Player player = Player.getInstance(createDriver(), createMotorcycle());

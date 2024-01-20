@@ -1,35 +1,14 @@
-import java.util.ArrayList;
+import java.util.Random;
 
-public class Opponent {
-    private Driver driver;
-    private Motorcycle motorcycle;
-    ArrayList<Opponent> opponents;
-    public Opponent(Driver driver, Motorcycle motorcycle){
-        this.driver=driver;
-        this.motorcycle=motorcycle;
-        this.opponents=new ArrayList<Opponent>();
+public class Opponent extends Character {
+    public Opponent(Driver driver, Motorcycle motorcycle, double topSpeed){
+        super(driver,motorcycle,topSpeed);
+        this.topSpeed=topSpeed;
     }
-
-    public Driver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(Driver driver) {
-        this.driver = driver;
-    }
-
-    public Motorcycle getMotorcycle() {
-        return motorcycle;
-    }
-
-    public void setMotorcycle(Motorcycle motorcycle) {
-        this.motorcycle = motorcycle;
-    }
-
-    public double getTopSpeed(Weather weather){
-        return this.driver.totalBonus(weather)+this.motorcycle.accelerates();
-    }
-    public void addOpponents(Opponent opponent){
-        opponents.add(opponent);
+    @Override
+    public double calculateTopSpeed(Weather weather) {
+        Random randomDouble = new Random();
+        double speedVariation = randomDouble.nextDouble(-10.5, 10.5);
+        return this.driver.totalBonus(weather) + this.motorcycle.accelerates() + speedVariation;
     }
 }

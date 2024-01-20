@@ -1,4 +1,4 @@
-public class Engine implements LevelUp {
+public class Engine{
     private int horsepower;
     private int tier;
 
@@ -30,12 +30,9 @@ public class Engine implements LevelUp {
         double engineBonusSpeed=Math.cbrt(horsepower)*20*1.60934;
         return engineBonusSpeed;
     }
-
-    @Override
     public void levelUp() {
-        tier+=1;
-        horsepower+=35;
-
+        this.tier+=1;
+        this.horsepower+=35;
     }
 }
 

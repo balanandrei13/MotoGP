@@ -1,29 +1,22 @@
-public class Player {
-    private Driver playerDriver;
-    private Motorcycle playerMotorcycle;
+public class Player extends Character {
+    public int tierCoins;
     private static Player instance;
-    private Player(Driver playerDriver,Motorcycle playerMotorcycle){
-        this.playerDriver=playerDriver;
-        this.playerMotorcycle=playerMotorcycle;
+
+    private Player(Driver playerDriver, Motorcycle playerMotorcycle, double topSpeed, int tierCoins) {
+        super(playerDriver, playerMotorcycle, topSpeed);
+        tierCoins=0;
     }
-    public int getPlayerLevel(){
-        return playerDriver.getLevel();
-    }
-    public static Player getInstance(Driver playerDriver,Motorcycle playerMotorcycle){
-        if(instance==null){
-            instance= new Player(playerDriver,playerMotorcycle);
+    public static Player getInstance(Driver playerDriver, Motorcycle playerMotorcycle, double topSpeed, int tierCoins) {
+        if (instance == null) {
+            instance = new Player(playerDriver, playerMotorcycle, topSpeed, tierCoins);
         }
         return instance;
     }
-    public double getTopSpeed(Weather weather){
-        return this.playerDriver.totalBonus(weather)+this.playerMotorcycle.accelerates();
+    @Override
+    public double calculateTopSpeed(Weather weather) {
+        return Player.instance.getDriver().totalBonus(weather) + Player.instance.getMotorcycle().accelerates();
     }
-    public Motorcycle getPlayerMotorcycle(){
-        return this.playerMotorcycle;
+    public int getTierCoins(){
+        return this.tierCoins;
     }
-    public Driver getPlayerDriver(){
-        return this.playerDriver;
-    }
-
 }
-

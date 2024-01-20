@@ -1,24 +1,21 @@
 
-public class Driver implements LevelUp{
+public class Driver{
     private String name;
     private int experience;
     private int level;
     private Weather weatherBonus;
-    private int tierCoin;
 
-    public Driver(String name, int experience,int level, Weather weatherBonus, int tierCoin) {
+    public Driver(String name, int experience,int level, Weather weatherBonus) {
         this.name=name;
         this.experience = experience;
         this.weatherBonus=weatherBonus;
         this.level=level;
-        this.tierCoin=tierCoin;
     }
     public Driver(String name, Weather weatherBonus){
         this.name=name;
         this.experience=0;
         this.weatherBonus=weatherBonus;
         this.level=0;
-        this.tierCoin=0;
     }
 
     public String getName() {
@@ -69,15 +66,7 @@ public class Driver implements LevelUp{
     }
     //DE MODIFICAT!!!!!
     public void increaseExperience(){
-        experience+=5;
+        this.experience+=5;
+    }
     }
 
-    @Override
-    public void levelUp() {
-    if (experience % 10 == 0 && level<10) {
-            level += 1;
-            tierCoin+=1;
-        }
-    }
-
-}

@@ -1,4 +1,4 @@
-public class Tire implements LevelUp {
+public class Tire{
     private int adherence;
     private int tier;
     public Tire(int adherence, int tier){
@@ -30,10 +30,8 @@ public class Tire implements LevelUp {
         int tireBonusSpeed= adherence/10 + tier;
         return tireBonusSpeed;
     }
-
-    @Override
     public void levelUp() {
-        tier+=1;
-        adherence+=10;
+        this.tier+=1;
+        this.adherence+=10;
     }
 }
